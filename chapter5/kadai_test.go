@@ -59,3 +59,12 @@ func TestCut(t *testing.T) {
 		assert.Error(t, err)
 	})
 }
+
+func BenchmarkCut(b *testing.B) {
+	b.ResetTimer()
+	src := bytes.NewBufferString("11,12,13\n21,22,2\n31,32,33")
+	dst := new(bytes.Buffer)
+	for i := 0; i < b.N; i++ {
+		Cut(src, dst, ",", 2)
+	}
+}
